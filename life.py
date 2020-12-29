@@ -17,7 +17,10 @@ class LifeBoard:
         self.board = new_board
 
     def switch(self, x, y):
-        self.board[y][x] = not self.board[y][x]
+        try:
+            self.board[y][x] = not self.board[y][x]
+        except IndexError:
+            print("Index out of range.")
 
     def count_neighbours(self, x, y):
         n = 0
@@ -25,7 +28,7 @@ class LifeBoard:
             for im in range(-1, 2):
                 if not (jm == 0 and im == 0):
                     try:
-                        if self.board[y + jm][x + im]:
+                        if self.board[y + jm][x + im] and y + jm >= 0 and x + im >= 0:
                             n += 1
                     except IndexError:
                         pass
